@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>chuxingbao_2</display-name><!--  display-name元素提供GUI工具可能会用来标记这个特定的Web应用的一个名称 -->
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file><!-- 此处配置  本项目运行出来的第一个页面 -->
+  </welcome-file-list>
+  <!--读取src下的配置文件-->
+  <context-param><!-- context-param元素声明应用范围内的初始化参数 -->
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <filter><!-- filter 过滤器元素将一个名字与一个实现javax.servlet.Filter接口的类相关联 -->
+    <filter-name>Spring character encoding filter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping><!--  filter-mapping 一旦命名了一个过滤器，就要利用filter-mapping元素把它与一个或多个servlet或JSP页面相关联 -->
+    <filter-name>Spring character encoding filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet><!-- 在向servlet或JSP页面制定初始化参数或定制URL时，必须首先命名servlet或JSP页面。Servlet元素就是用来完成此项任务的 -->
+    <servlet-name>chuxingbao</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping><!-- 服务器一般为servlet提供一个缺省的URL：http://host/webAppPrefix/servlet/ServletName。但是，常常会更改这个URL，以便servlet可以访问初始化参数或更容易地处理相对URL。在更改缺省URL时，使用servlet-mapping元素。 -->
+    <servlet-name>chuxingbao</servlet-name><!-- 此处servlet的名字要和 servlet的配置文件zhihu-servlet.xml的-servlet.xml的前面保持一致，否则会报错！！！-->
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>
